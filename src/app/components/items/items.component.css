@@ -1,0 +1,21 @@
+.width {
+  width: 250px;
+}
+.width img {
+  width: 150px;
+}
+.gap {
+  margin: 5px;
+}
+.zIndex {
+  position: relative;
+  z-index: -1;
+}
+.modals {
+  position: absolute;
+  z-index: 2;
+  height: 90%;
+  background-color: rgb(255, 255, 255, 90%);
+  border-radius: 23px;
+  padding: 25px;
+}
