@@ -1,12 +1,19 @@
-import { Directive, ElementRef, HostListener } from '@angular/core';
+import { Directive, ElementRef, EventEmitter, HostListener, Output } from '@angular/core';
 
 @Directive({
   selector: '[appModal]',
 })
 export class ModalDirective {
-  constructor(private el: ElementRef) {}
-  @HostListener('click', ['event'])
-  onClick() {
-    console.log();
+  @Output() clickOutside = new EventEmitter<void>();
+
+  constructor(private el: ElementRef) { }
+
+
+  @HostListener('document:click', ['$event'])
+  onClick(event: MouseEvent) {
+
+    if (!this.el.nativeElement.contains(event.target)) {
+      this.clickOutside.emit();
+    }
   }
 }

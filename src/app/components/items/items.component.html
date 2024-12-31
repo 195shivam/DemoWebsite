@@ -1,42 +1,121 @@
-<div class="d-grid container-fluid my-3 ">
+<div class="d-grid container-fluid my-3">
+  <div appModal (clickOutside)="closeModal()">
     <div class="row justify-content-around">
-        <div class="col-10">
-            <p class="fw-bold">{{filteredProduct.length}} results found</p>
-        </div>
-        <div class="col-2 ">
-            <button class="btn btn-danger" (click)="handleModal()">Sort</button>
-        </div>
-
+      <div class="col-10">
+        <p class="fw-bold">{{ filteredProduct.length }} results found</p>
+      </div>
+      <div class="col-2">
+        <button class="btn btn-danger" (click)="handleModal()">Sort</button>
+      </div>
     </div>
     <div class="row">
-        <div class="col-7">
-
-        </div>
-        <div class="col-5">
-            <div *ngIf="showModal" class="modals">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Reiciendis
-                expedita iusto commodi quas vel placeat delectus, labore aperiam, quis, beatae accusamus quidem
-                accusantium magnam! Explicabo soluta asperiores sapiente consequuntur quod sequi inventore velit aperiam
-                dolor officiis veritatis minima expedita in eveniet qui quaerat a odit nostrum, labore nulla
-                necessitatibus dicta. Vitae esse laudantium quo expedita facilis, in unde debitis ipsum, aperiam cum
-                corrupti repellendus commodi odit veniam recusandae minus labore quam incidunt inventore culpa rerum
-                enim. Quod hic ipsa vel minus, qui voluptatum cupiditate tenetur quasi? Quis magni saepe assumenda unde
-                quas numquam ducimus nostrum aspernatur quibusdam amet neque eveniet alias, quam labore consectetur,
-                iste accusantium quidem! Fugit excepturi earum, iure nesciunt voluptate facilis id maxime nam voluptatum
-                sint pariatur nulla distinctio quam porro. Obcaecati velit nostrum accusamus maiores voluptatibus minima
-                dolore </div>
-        </div>
-    </div>
-    <div class="row position-relative">
-        <div class="d-flex flex-wrap justify-content-around">
-            <div *ngFor="let product of filteredProduct" class="width gap bg-white p-2 text-center">
-                <img [src]="product.image" alt="" class="border border-1 rounded-2">
-                <p *ngIf="product.quantity===0"
-                    class="border border-1 w-50 text-white fw-bold rounded-2 mx-4 bg-danger ">Out Of stock</p>
-                <p *ngIf="product.quantity>0 && product.low_quantity>product.quantity"
-                    class="border border-1 w-50 text-white fw-bold rounded-2 mx-4 bg-primary ">On High Demand</p>
-                <h3>{{product.name}}</h3>
-                <p> Lorem ipsum dolor sit amet consectetur adipisicing elit. Placeat, atque.</p>
+      <div class="col-5"></div>
+      <div class="col-7">
+        <div *ngIf="showModal" class="modals">
+          <div class="d-grid">
+            <div class="row">
+              <div class="col-4">
+                <p class="fw-bold">Filter By:</p>
+              </div>
+              <div class="col-4"></div>
+              <div class="col-4">
+                <button
+                  class="btn text-warning border border-1 border-black"
+                  (click)="handleReset()"
+                >
+                  Reset All
+                </button>
+              </div>
             </div>
+            <div class="row">
+              <p class="fw-bold">Sort:</p>
+            </div>
+            <div class="row">
+              <div class="col-4">
+                <button
+                  class="btn border border-1 border-black"
+                  (click)="sortAtoZ()"
+                  [ngClass]="{
+                    'btn-danger': doSortAtoZ,
+                    'border-0': doSortAtoZ
+                  }"
+                >
+                  A to Z
+                </button>
+              </div>
+              <div class="col-4">
+                <button
+                  class="btn border border-1 border-black"
+                  (click)="sortZtoA()"
+                  [ngClass]="{
+                    'btn-danger': doSortZtoA,
+                    'border-0': doSortZtoA
+                  }"
+                >
+                  Z to A
+                </button>
+              </div>
+            </div>
+            <div class="row position-absolute bottom-0 m-3">
+              <div class="col-12">
+                <button class="btn btn-danger" (click)="applySort()">Apply</button>
+              </div>
+            </div>
+          </div>
         </div>
+      </div>
     </div>
+  </div>
+  <div class="row">
+    <div class="col-3 d-flex flex-column justify-content-center bg-white rounded-2 m-2 text-center" *ngFor="let product of filteredProduct">
+      <img [src]="product.image" alt="" class="border border-1 imageWidth rounded-2 d-flex flex-column justify-content-center position-relative z-1" />
+      <p
+          *ngIf="product.quantity === 0"
+          class="border border-1 fs text-white fw-bold rounded-2 mx-4 bg-danger bg-opacity-50 position-relative w-50 z-2 detail"
+        >
+          Out Of stock
+        </p>
+        <p
+          *ngIf="
+            product.quantity > 0 && product.low_quantity > product.quantity
+          "
+          class="border border-1 text-white fw-bold rounded-2 mx-4 bg-primary bg-opacity-50 fs position-relative z-2 detail w-50"
+        >
+          On High Demand
+        </p>
+        <h3>{{ product.name }}</h3><br>
+        <p class="d-flex justify-content-center m-0">{{product.points}} Points</p>
+        <hr>
+        <p><span *ngIf="product.validTill.length" class="opacity-50">Valid Until: </span>
+          <span>{{product.validTill}}</span></p>
+    </div>
+
+    <!-- <div class="col-4">
+      <div
+        *ngFor="let product of filteredProduct"
+        class="width gap bg-white p-2 text-center"
+      >
+        <img [src]="product.image" alt="" class="border border-1 rounded-2" />
+        <p
+          *ngIf="product.quantity === 0"
+          class="border border-1 w-50 text-white fw-bold rounded-2 mx-4 bg-danger"
+        >
+          Out Of stock
+        </p>
+        <p
+          *ngIf="
+            product.quantity > 0 && product.low_quantity > product.quantity
+          "
+          class="border border-1 w-50 text-white fw-bold rounded-2 mx-4 bg-primary"
+        >
+          On High Demand
+        </p>
+        <h3>{{ product.name }}</h3>
+        <p>
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Placeat,
+          atque.
+        </p>
+      </div>
+    </div> -->
+  </div>
 </div>

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild, ElementRef } from '@angular/core';
 import { CategoryService } from 'src/app/services/category.service';
 
 @Component({
@@ -8,24 +8,29 @@ import { CategoryService } from 'src/app/services/category.service';
 })
 export class CategoryComponent {
   constructor(public category: CategoryService) {}
+  @ViewChild('eVoucher') eVoucher:any
+  @ViewChild('product') product:any
+  @ViewChild('evergreen') evergreen:any
+  @ViewChild('fashion') fashion:any
   handleEvoucherChange($event: Event) {
     const check = $event.target as HTMLInputElement;
-    this.category.eVoucher = check.checked;
-    console.log(check.checked);
   }
   handleProductChange($event: Event) {
     const check = $event.target as HTMLInputElement;
-    this.category.product = check.checked;
-    console.log(check.checked);
   }
   handleEvergereenChange($event: Event) {
     const check = $event.target as HTMLInputElement;
-    this.category.evergreen = check.checked;
-    console.log(check.checked);
+
   }
   handleFashionChange($event: Event) {
     const check = $event.target as HTMLInputElement;
-    this.category.fashion = check.checked;
-    console.log(check.checked);
   }
+  ngAfterViewInit(){
+    this.category.eVoucher=this.eVoucher.nativeElement as HTMLInputElement
+    this.category.evergreen=this.evergreen.nativeElement as HTMLInputElement
+    this.category.fashion=this.fashion.nativeElement as HTMLInputElement
+    this.category.product=this.product.nativeElement as HTMLInputElement
+  }
+
+
 }

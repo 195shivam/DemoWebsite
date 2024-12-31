@@ -3,7 +3,7 @@
     <div class="row justify-content-around">
       <div class="col-lg-10 col-6 d-flex align-items-center p-1">
         <img routerLink=""
-          src="https://play-lh.googleusercontent.com/Fro4e_osoDhhrjgiZ_Y2C5FNXBMWvrb4rGpmkM1PDAcUPXeiAlPCq7NeaT4Q6NRUxRqo"
+          src="../assets/images/logo.jpeg"
           alt="Logo" class="logo">
       </div>
       <div class="col-lg-1 col-3 d-flex align-items-center gap-2">
@@ -21,14 +21,14 @@
 
 <div class="d-flex gap-2 container-lg container-fluid px-lg-5 my-3 belowSuggestion">
   <span class="fw-bold">Applied Filter:</span>
-  <span class="border border-dark border-1 rounded-1" *ngIf="category.eVoucher">e-voucher <button
-      class="border-0 button">x</button></span>
-  <span class="border border-dark border-1 rounded-1" *ngIf="category.product">Products <button
-      class="border-0 button">x</button></span>
-  <span class="border border-dark border-1 rounded-1" *ngIf="category.evergreen">evergreen <button
-      class="border-0 button">x</button></span>
-  <span class="border border-dark border-1 rounded-1" *ngIf="category.fashion">Fashion & Retail <button
-      class="border-0 button">x</button></span>
+  <span class="border border-dark border-1 rounded-1" *ngIf="this.category.eVoucher!=undefined && category.eVoucher.checked">e-voucher <button
+      class="border-0 button" (click)="removeEvoucher()">x</button></span>
+  <span class="border border-dark border-1 rounded-1" *ngIf="this.category.product!=undefined && category.product.checked">Products <button
+      class="border-0 button" (click)="removeProduct()">x</button></span>
+  <span class="border border-dark border-1 rounded-1" *ngIf="this.category.evergreen!=undefined && category.evergreen.checked">evergreen <button
+      class="border-0 button" (click)="removeEvergreen()">x</button></span>
+  <span class="border border-dark border-1 rounded-1" *ngIf="this.category.fashion!=undefined && category.fashion.checked">Fashion & Retail <button
+      class="border-0 button" (click)="removeFashion()">x</button></span>
 </div>
 
 <div class="container-lg container-fluid d-grid">
@@ -43,23 +43,26 @@
 </div>
 
 <router-outlet></router-outlet>
-<footer class="d-grid bg-dark bg-opacity-25 w-100 footer">
-  <div class="row container justify-content-around p-2">
-    <div class="col-4 text-center">
-      <img
-        src="https://play-lh.googleusercontent.com/Fro4e_osoDhhrjgiZ_Y2C5FNXBMWvrb4rGpmkM1PDAcUPXeiAlPCq7NeaT4Q6NRUxRqo"
-        alt="Logo" class="logo">
-    </div>
-    <div class="col-4 text-center">
-      <p class="fw-bold">Version</p>
-      <p>2.2.2</p>
-    </div>
-    <div class="col-4 d-flex flex-column text-center">
-      <p class="fw-bold btn p-0" routerLink="/about">About</p>
-      <p class="btn p-0" routerLink="/contact">Contact Us</p>
-      <p class="btn p-0" routerLink="/privacy">Privacy</p>
-      <p class="btn p-0" routerLink="/termofuse">Term Of Use</p>
-    </div>
+<footer class=" bg-dark bg-opacity-25 position-relative border-0 w-100">
+  <div class="d-grid">
+    <div class="row">
 
+      <div class="col-4 text-center">
+        <img
+          src="../assets/images/logo.jpeg"
+          alt="Logo" class="logo">
+      </div>
+      <div class="col-4 text-center">
+        <p class="fw-bold">Version</p>
+        <p>2.2.2</p>
+      </div>
+      <div class="col-4 text-center">
+        <div><p class="fw-bold btn p-0" routerLink="/about">About</p></div>
+        <div><p class="btn p-0" routerLink="/contact">Contact Us</p></div>
+        <div><p class="btn p-0" routerLink="/privacy">Privacy</p></div>
+        <div><p class="btn p-0" routerLink="/termofuse">Term Of Use</p></div>
+      </div>
+
+    </div>
   </div>
 </footer>
