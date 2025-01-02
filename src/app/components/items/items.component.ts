@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { filter, toArray } from 'rxjs/operators';
 import { CategoryService } from 'src/app/services/category.service';
 import { DataService } from 'src/app/services/data.service';
+import { SearchComponent } from '../search/search.component';
+import { SearchService } from 'src/app/services/search.service';
 
 @Component({
   selector: 'app-items',
@@ -9,13 +11,14 @@ import { DataService } from 'src/app/services/data.service';
   styleUrls: ['./items.component.css'],
 })
 export class ItemsComponent {
-  constructor(public data: DataService, public category: CategoryService) {
+  constructor(public data: DataService, public category: CategoryService , private search:SearchService) {
     // console.log(data.product);
   }
   doSortAtoZ = false;
   doSortZtoA = false;
   showModal = false;
   doApply=false;
+  tempArr:any=[]
   filteredProduct: any = [];
   sortZtoA() {
     this.doApply=false
@@ -51,6 +54,7 @@ export class ItemsComponent {
     this.category.product.checked=false
     this.category.fashion.checked=false
     this.showModal=false
+    this.tempArr=[]
 
   }
   handleModal() {
@@ -62,22 +66,11 @@ export class ItemsComponent {
     // console.log(55)
   }
   applySort(){
-    this.doApply=true
+    // this.doApply=true
     this.showModal=false
-  }
-  ngOnInit(){
-
-  }
-
-  ngDoCheck() {
-    this.data.dataObs.pipe(toArray()).subscribe({
-      next: (v) => {this.filteredProduct = v
-
-      },
-    });
-    // console.log(this.doSortAtoZ,this.doSortZtoA,this.doApply )
+    this.doApply=true
     if(this.doSortAtoZ && this.doApply){
-      this.filteredProduct=this.filteredProduct.sort((a:any, b:any) => {
+      this.tempArr=this.filteredProduct.sort((a:any, b:any) => {
         if (a.name.toLowerCase() < b.name.toLowerCase()) {
           return -1;
         }
@@ -89,7 +82,7 @@ export class ItemsComponent {
 
     }
     else if(this.doSortZtoA && this.doApply){
-      this.filteredProduct=this.filteredProduct.sort((a:any, b:any) => {
+      this.tempArr=this.filteredProduct.sort((a:any, b:any) => {
         if (a.name.toLowerCase() < b.name.toLowerCase()) {
           return -1;
         }
@@ -98,11 +91,55 @@ export class ItemsComponent {
         }
         return 0;
       });
-      this.filteredProduct=this.filteredProduct.reverse()
-      // console.log(this.filteredProduct)
+      this.tempArr=this.tempArr.reverse()
 
     }
-    // console.log(65)
-    // console.log(this.filteredProduct)
+    this.doApply=false;
+    console.log(this.tempArr)
   }
+
+
+  ngDoCheck() {
+
+    this.data.dataObs.pipe(
+      filter((v) => {
+        if (
+          !(
+            this.category.eVoucher.checked ||
+            this.category.evergreen.checked ||
+            this.category.fashion.checked ||
+            this.category.product.checked
+          )
+        )
+          return true;
+        else if (this.category.eVoucher.checked && v.category === 'e-voucher' && this.data.suggestionProduct.includes(v)){
+          console.log(this.data.suggestionProduct.includes(v))
+          return true;
+        }
+
+        else if (this.category.evergreen.checked && v.category === 'evergreen')
+          return true;
+        else if (this.category.fashion.checked && v.category === 'fashion & retail')
+          return true;
+        else if (this.category.product.checked && v.category === 'product') return true;
+        else return false;
+      }),
+      toArray()).subscribe({
+      next: (v) => {this.filteredProduct = v
+        this.data.suggestionProduct=this.filteredProduct
+      },
+    });
+
+
+    if(this.search.searchedArr.length>0){
+
+      this.filteredProduct=this.search.searchedArr
+      this.search.searchedArr=[]
+    }
+    if(this.filteredProduct.length === this.tempArr.length){
+      this.filteredProduct=this.tempArr
+    }
+
+  }
+
 }

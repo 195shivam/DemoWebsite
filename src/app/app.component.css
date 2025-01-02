@@ -2,14 +2,15 @@
   width: 50px;
   border-radius: 23px;
 }
-.footer {
-  position: relative;
-  bottom: 0;
-}
 .icon {
   width: 30px;
   border-radius: 23px;
 }
 .button {
   cursor: pointer;
+}
+.footer{
+  position: relative;
+  bottom: 0;
+  margin-top: 14%;
 }

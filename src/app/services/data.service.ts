@@ -1,12 +1,13 @@
 import { Injectable } from '@angular/core';
 import { filter, from, toArray } from 'rxjs';
 import { CategoryService } from './category.service';
+import { SearchService } from './search.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class DataService {
-  constructor(private category: CategoryService) {}
+  constructor(private category: CategoryService , private search:SearchService) {}
   product = [
     {
       id: 1,
@@ -377,27 +378,9 @@ export class DataService {
       validTill:''
     },
   ];
-  suggestionObs=from(this.product)
-
+  suggestionProduct:any=this.product
+  filterData:any=[]
   dataObs = from(this.product).pipe(
-    filter((v) => {
-      if (
-        !(
-          this.category.eVoucher.checked ||
-          this.category.evergreen.checked ||
-          this.category.fashion.checked ||
-          this.category.product.checked
-        )
-      )
-        return true;
-      else if (this.category.eVoucher.checked && v.category === 'e-voucher')
-        return true;
-      else if (this.category.evergreen.checked && v.category === 'evergreen')
-        return true;
-      else if (this.category.fashion.checked && v.category === 'fashion & retail')
-        return true;
-      else if (this.category.product.checked && v.category === 'product') return true;
-      else return false;
-    })
-  );
+
+  )
 }
