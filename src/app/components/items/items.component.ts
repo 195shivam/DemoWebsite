@@ -4,6 +4,7 @@ import { CategoryService } from 'src/app/services/category.service';
 import { DataService } from 'src/app/services/data.service';
 import { SearchComponent } from '../search/search.component';
 import { SearchService } from 'src/app/services/search.service';
+import { SortingService } from 'src/app/services/sorting.service';
 
 @Component({
   selector: 'app-items',
@@ -11,44 +12,43 @@ import { SearchService } from 'src/app/services/search.service';
   styleUrls: ['./items.component.css'],
 })
 export class ItemsComponent {
-  constructor(public data: DataService, public category: CategoryService , private search:SearchService) {
+  constructor(public data: DataService, public category: CategoryService , private search:SearchService , public sorting:SortingService)  {
     // console.log(data.product);
   }
-  doSortAtoZ = false;
-  doSortZtoA = false;
+
   showModal = false;
   doApply=false;
   tempArr:any=[]
   filteredProduct: any = [];
   sortZtoA() {
     this.doApply=false
-    if(this.doSortZtoA){
-      this.doSortZtoA=false;
+    if(this.sorting.doSortZtoA){
+      this.sorting.doSortZtoA=true;
     }
-    else if(this.doSortAtoZ){
-      this.doSortAtoZ=false;
-      this.doSortZtoA=true;
+    else if(this.sorting.doSortAtoZ ){
+      this.sorting.doSortAtoZ =false;
+      this.sorting.doSortZtoA=true;
     }
     else{
-      this.doSortZtoA=!this.doSortZtoA
+      this.sorting.doSortZtoA=!this.sorting.doSortZtoA
     }
   }
   sortAtoZ() {
     this.doApply=false
-    if(this.doSortAtoZ){
-      this.doSortAtoZ=false;
+    if(this.sorting.doSortAtoZ ){
+      this.sorting.doSortAtoZ =true;
     }
-    else if(this.doSortZtoA){
-      this.doSortAtoZ=true;
-      this.doSortZtoA=false;
+    else if(this.sorting.doSortZtoA){
+      this.sorting.doSortAtoZ =true;
+      this.sorting.doSortZtoA=false;
     }
     else{
-      this.doSortAtoZ=!this.doSortAtoZ
+      this.sorting.doSortAtoZ =!this.sorting.doSortAtoZ
     }
   }
   handleReset() {
-    this.doSortAtoZ=false;
-    this.doSortZtoA=false;
+    this.sorting.doSortAtoZ =false;
+    this.sorting.doSortZtoA=false;
     this.category.eVoucher.checked=false
     this.category.evergreen.checked=false
     this.category.product.checked=false
@@ -69,7 +69,7 @@ export class ItemsComponent {
     // this.doApply=true
     this.showModal=false
     this.doApply=true
-    if(this.doSortAtoZ && this.doApply){
+    if(this.sorting.doSortAtoZ && this.doApply){
       this.tempArr=this.filteredProduct.sort((a:any, b:any) => {
         if (a.name.toLowerCase() < b.name.toLowerCase()) {
           return -1;
@@ -81,7 +81,7 @@ export class ItemsComponent {
       });
 
     }
-    else if(this.doSortZtoA && this.doApply){
+    else if(this.sorting.doSortZtoA&& this.doApply){
       this.tempArr=this.filteredProduct.sort((a:any, b:any) => {
         if (a.name.toLowerCase() < b.name.toLowerCase()) {
           return -1;

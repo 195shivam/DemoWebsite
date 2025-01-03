@@ -10,7 +10,7 @@
     </div>
     <div class="row bg-black">
       <div class="col-2">
-        <div *ngIf="showModal" class="modals">
+        <div class="modals" [ngClass]="{'pos':showModal}">
           <div class="d-grid">
             <div class="row">
               <div class="col-4">
@@ -35,8 +35,8 @@
                   class="btn border border-1 border-black"
                   (click)="sortAtoZ()"
                   [ngClass]="{
-                    'btn-danger': doSortAtoZ,
-                    'border-0': doSortAtoZ
+                    'btn-danger': sorting.doSortAtoZ,
+                    'border-0': sorting.doSortAtoZ
                   }"
                 >
                   A to Z
@@ -47,8 +47,8 @@
                   class="btn border border-1 border-black"
                   (click)="sortZtoA()"
                   [ngClass]="{
-                    'btn-danger': doSortZtoA,
-                    'border-0': doSortZtoA
+                    'btn-danger':sorting.doSortZtoA,
+                    'border-0':sorting.doSortZtoA
                   }"
                 >
                   Z to A
