@@ -141,7 +141,7 @@ export class DataService {
     },
     {
       id: 13,
-      name: 'Bear',
+      name: 'Beer',
       image:
         '../../assets/images/bear.jpeg',
       quantity: 25,
