@@ -1,5 +1,6 @@
 import { Component, ViewChild, ElementRef } from '@angular/core';
 import { CategoryService } from 'src/app/services/category.service';
+import { SearchService } from 'src/app/services/search.service';
 import { SortingService } from 'src/app/services/sorting.service';
 
 @Component({
@@ -8,29 +9,41 @@ import { SortingService } from 'src/app/services/sorting.service';
   styleUrls: ['./category.component.css'],
 })
 export class CategoryComponent {
-  constructor(public category: CategoryService , public sorting:SortingService) {}
+  constructor(public category: CategoryService , public sorting:SortingService , private search:SearchService) {}
   @ViewChild('eVoucher') eVoucher:any
   @ViewChild('product') product:any
   @ViewChild('evergreen') evergreen:any
   @ViewChild('fashion') fashion:any
   handleEvoucherChange($event: Event) {
     const check = $event.target as HTMLInputElement;
+    if(check.checked){
+      this.search.searchBar.nativeElement.value=''
+    }
     this.sorting.doSortAtoZ=false;
     this.sorting.doSortZtoA=false;
   }
   handleProductChange($event: Event) {
     const check = $event.target as HTMLInputElement;
+    if(check.checked){
+      this.search.searchBar.nativeElement.value=''
+    }
     this.sorting.doSortAtoZ=false;
     this.sorting.doSortZtoA=false;
   }
   handleEvergereenChange($event: Event) {
     const check = $event.target as HTMLInputElement;
+    if(check.checked){
+
+    }
     this.sorting.doSortAtoZ=false;
     this.sorting.doSortZtoA=false;
 
   }
   handleFashionChange($event: Event) {
     const check = $event.target as HTMLInputElement;
+    if(check.checked){
+      this.search.searchBar.nativeElement.value=''
+    }
     this.sorting.doSortAtoZ=false;
     this.sorting.doSortZtoA=false;
   }

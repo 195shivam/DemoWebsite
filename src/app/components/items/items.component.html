@@ -66,8 +66,9 @@
     </div>
   </div>
   <div class="row">
+    <div *ngIf="filteredProduct.length===0" class=" d-flex justify-content-center fw-bolder text-danger fs-3">No Product Found</div>
     <div class="col-lg-3 col-5 d-flex flex-column justify-content-center bg-white rounded-2 m-2 text-center" *ngFor="let product of filteredProduct">
-      <img [src]="product.image" alt="" class="border border-1 imageWidth rounded-2 d-flex flex-column justify-content-center position-relative z-1" />
+      <img [src]="product.image" (error)="handleError($event)" alt="" class="border border-1 imageWidth rounded-2 d-flex flex-column justify-content-center position-relative z-1" />
       <p
           *ngIf="product.quantity === 0"
           class="border border-1 fs text-white fw-bold rounded-2 mx-4 bg-danger bg-opacity-50 position-relative w-50 z-2 detail"

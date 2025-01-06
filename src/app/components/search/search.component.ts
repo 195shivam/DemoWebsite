@@ -11,12 +11,16 @@ import { SearchService } from 'src/app/services/search.service';
   styleUrls: ['./search.component.css'],
 })
 export class SearchComponent {
+whenClickedOutside() {
+this.search.searchBar.nativeElement.value=''
+}
   constructor(private data: DataService , private search:SearchService) {}
   @ViewChild('searchBar') searchBar: any;
   suggestionArray:any;
   ngAfterViewInit(): void {
+    this.search.searchBar=this.searchBar
     this.suggestionArray=fromEvent(this.searchBar.nativeElement, 'input')
-      .pipe(debounceTime(400))
+
   }
   ngDoCheck(){
 
@@ -36,6 +40,7 @@ export class SearchComponent {
           }
           ),
 
+
           toArray()
         ).subscribe({
           next:(d:any)=>{this.search.searchedArr=d
@@ -44,7 +49,7 @@ export class SearchComponent {
         })
       });
     }
-    console.log(this.data.suggestionProduct,'search')
+    // console.log(this.data.suggestionProduct,'search')
 
   }
 }

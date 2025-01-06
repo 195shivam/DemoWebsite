@@ -12,6 +12,9 @@ import { SortingService } from 'src/app/services/sorting.service';
   styleUrls: ['./items.component.css'],
 })
 export class ItemsComponent {
+handleError($event: any) {
+  $event.target.src='../../../assets/images/placeholder.png'
+}
   constructor(public data: DataService, public category: CategoryService , private search:SearchService , public sorting:SortingService)  {
     // console.log(data.product);
   }
@@ -100,7 +103,6 @@ export class ItemsComponent {
 
 
   ngDoCheck() {
-
     this.data.dataObs.pipe(
       filter((v) => {
         if (
@@ -112,7 +114,7 @@ export class ItemsComponent {
           )
         )
           return true;
-        else if (this.category.eVoucher.checked && v.category === 'e-voucher' && this.data.suggestionProduct.includes(v)){
+        else if (this.category.eVoucher.checked && v.category === 'e-voucher'){
           console.log(this.data.suggestionProduct.includes(v))
           return true;
         }
@@ -130,8 +132,13 @@ export class ItemsComponent {
       },
     });
 
+    // if(this.search.searchedArr.length>0){
+    //   this.filteredProduct=this.search.searchedArr
+    //   this.search.searchedArr=[]
+    // }
 
-    if(this.search.searchedArr.length>0){
+
+    if(this.search.searchBar!=undefined && (this.search.searchedArr.length>0 || this.search.searchBar.nativeElement.value.length>0)){
 
       this.filteredProduct=this.search.searchedArr
       this.search.searchedArr=[]
