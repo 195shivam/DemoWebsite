@@ -2,4 +2,5 @@
 .body {
   background-color: rgb(79, 79, 242, 10%);
   overflow-x: hidden;
+  width:100vw ;
 }

@@ -9,23 +9,9 @@ import { SearchService } from './services/search.service';
 })
 export class AppComponent {
   title = 'demoWebsite';
-  constructor(public category: CategoryService, private search:SearchService) {}
-  removeEvoucher(){
-    this.category.eVoucher.checked=false
-    this.search.searchBar.nativeElement.value=''
-
-  }
-  removeProduct(){
-    this.category.product.checked=false;
-    this.search.searchBar.nativeElement.value=''
-  }
-  removeEvergreen(){
-    this.category.evergreen.checked=false;
-    this.search.searchBar.nativeElement.value=''
-  }
-  removeFashion(){
-    this.category.fashion.checked=false
-    this.search.searchBar.nativeElement.value=''
+  constructor(public category: CategoryService, private search:SearchService ) {}
+  removeCategory(index:number){
+    this.category.categories.splice(index,1)
   }
 
 }

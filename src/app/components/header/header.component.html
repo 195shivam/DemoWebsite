@@ -1,0 +1,20 @@
+<nav class="bg-danger">
+  <div class="d-grid container-fluid container-lg ">
+    <div class="row justify-content-around">
+      <div class="col-lg-10 col-6 d-flex align-items-center p-1">
+        <img routerLink=""
+          src="../assets/images/logo.jpeg"
+          alt="Logo" class="logo">
+      </div>
+      <div class="col-lg-1 col-3 d-flex align-items-center gap-2" (click)="handleClick($event)">
+        <div *ngFor="let icon of navIcon.navIconsArr" >
+          <img
+          [src]='icon.path'
+          [id]='icon.id'
+          class="icon" alt="notification">
+        </div>
+
+      </div>
+    </div>
+  </div>
+</nav>

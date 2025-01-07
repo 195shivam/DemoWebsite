@@ -6,6 +6,14 @@ import { Injectable } from '@angular/core';
 export class SortingService {
 
   constructor() { }
-  doSortAtoZ = false;
-  doSortZtoA = false;
+  sortingOrder=[
+    {
+      id:1,
+      order:'AtoZ'
+    },
+    {
+      id:2,
+      order:'ZtoA'
+    }
+  ]
 }

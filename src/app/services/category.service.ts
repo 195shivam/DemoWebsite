@@ -5,8 +5,6 @@ import { Injectable } from '@angular/core';
 })
 export class CategoryService {
   constructor( ) {}
-  eVoucher :any;
-  evergreen :any;
-  product :any;
-  fashion :any;
+  categories:any=[]
+
 }

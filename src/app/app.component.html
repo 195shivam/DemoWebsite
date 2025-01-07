@@ -1,34 +1,10 @@
-<nav class="bg-danger">
-  <div class="d-grid container-fluid container-lg ">
-    <div class="row justify-content-around">
-      <div class="col-lg-10 col-6 d-flex align-items-center p-1">
-        <img routerLink=""
-          src="../assets/images/logo.jpeg"
-          alt="Logo" class="logo">
-      </div>
-      <div class="col-lg-1 col-3 d-flex align-items-center gap-2">
-        <img
-          src="https://thumbs.dreamstime.com/b/notification-icon-vector-material-design-social-media-element-user-interface-sign-eps-ui-image-illustration-new-message-bell-icons-107566385.jpg"
-          class="icon" alt="notification">
-        <img src="https://cdn-icons-png.flaticon.com/512/2531/2531277.png" class="icon" alt="">
-        <img src="https://t4.ftcdn.net/jpg/02/29/75/83/360_F_229758328_7x8jwCwjtBMmC6rgFzLFhZoEpLobB6L8.jpg"
-          class="icon" alt="">
-      </div>
-    </div>
-  </div>
-</nav>
+<app-header></app-header>
 <app-search class="my-3 suggestion"></app-search>
 
 <div class="d-flex gap-2 container-lg container-fluid px-lg-5 my-3 belowSuggestion">
   <span class="fw-bold">Applied Filter:</span>
-  <span class="border border-dark border-1 rounded-1" *ngIf="this.category.eVoucher!=undefined && category.eVoucher.checked">e-voucher <button
-      class="border-0 button" (click)="removeEvoucher()">x</button></span>
-  <span class="border border-dark border-1 rounded-1" *ngIf="this.category.product!=undefined && category.product.checked">Products <button
-      class="border-0 button" (click)="removeProduct()">x</button></span>
-  <span class="border border-dark border-1 rounded-1" *ngIf="this.category.evergreen!=undefined && category.evergreen.checked">evergreen <button
-      class="border-0 button" (click)="removeEvergreen()">x</button></span>
-  <span class="border border-dark border-1 rounded-1" *ngIf="this.category.fashion!=undefined && category.fashion.checked">Fashion & Retail <button
-      class="border-0 button" (click)="removeFashion()">x</button></span>
+  <span class="border border-dark border-1 rounded-1" *ngFor="let cetegory of category.categories; let i=index">{{cetegory}}<button
+    class="border-0 button" (click)="removeCategory(i)">x</button></span>
 </div>
 
 <div class="container-lg container-fluid d-grid">
@@ -43,26 +19,4 @@
 </div>
 
 <router-outlet></router-outlet>
-<footer class=" bg-dark bg-opacity-25 footer container-fluid">
-  <div class="d-grid">
-    <div class="row">
-
-      <div class="col-4 text-center">
-        <img
-          src="../assets/images/logo.jpeg"
-          alt="Logo" class="logo">
-      </div>
-      <div class="col-4 text-center">
-        <p class="fw-bold">Version</p>
-        <p>2.2.2</p>
-      </div>
-      <div class="col-4 text-center">
-        <div><p class="fw-bold btn p-0" routerLink="/about">About</p></div>
-        <div><p class="btn p-0" routerLink="/contact">Contact Us</p></div>
-        <div><p class="btn p-0" routerLink="/privacy">Privacy</p></div>
-        <div><p class="btn p-0" routerLink="/termofuse">Term Of Use</p></div>
-      </div>
-
-    </div>
-  </div>
-</footer>
+<app-footer></app-footer>

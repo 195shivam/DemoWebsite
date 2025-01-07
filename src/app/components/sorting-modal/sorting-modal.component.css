@@ -1,0 +1,25 @@
+.modals {
+  position: absolute;
+  top: 0;
+  right: 0rem;
+  z-index: 4;
+  height: 100%;
+  width: 25vw;
+  background-color: rgb(255, 255, 255);
+  transition: right 0.3s ease-in-out;
+  border-radius: 13px;
+  padding: 25px;
+}
+.modals.pos{
+  right: 0;
+}
+@media (max-width: 1000px) {
+  .modals {
+    width: 50%;
+  }
+}
+@media (max-width: 500px) {
+  .modals {
+    width: 75%;
+  }
+}

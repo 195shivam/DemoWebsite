@@ -1,0 +1,40 @@
+<div class="row bg-black">
+  <div class="col-2">
+    <div  class="modals" [ngClass]="{'pos':showModal}">
+      <div class="d-grid">
+        <div class="row">
+          <div class="col-4">
+            <p class="fw-bold">Filter By:</p>
+          </div>
+          <div class="col-4"></div>
+          <div class="col-4">
+            <button
+              class="btn text-warning border border-1 border-black"
+              (click)="handleReset()"
+            >
+              Reset All
+            </button>
+          </div>
+        </div>
+        <div class="row">
+          <p class="fw-bold">Sort:</p>
+        </div>
+        <div class="row" (click)="handleSort($event)">
+          <div class="col-4" *ngFor="let order of sortingService.sortingOrder">
+            <button
+              class="btn border border-1 border-black"
+              [ngClass]="{'btn-danger':c===order.id,'border-0':c===order.id}"
+            >
+              {{order.order}}
+            </button>
+          </div>
+        </div>
+        <div class="row position-absolute bottom-0 m-3">
+          <div class="col-12">
+            <button class="btn btn-danger" (click)="applySort()">Apply</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

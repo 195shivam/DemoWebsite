@@ -9,50 +9,19 @@ import { SortingService } from 'src/app/services/sorting.service';
   styleUrls: ['./category.component.css'],
 })
 export class CategoryComponent {
-  constructor(public category: CategoryService , public sorting:SortingService , private search:SearchService) {}
-  @ViewChild('eVoucher') eVoucher:any
-  @ViewChild('product') product:any
-  @ViewChild('evergreen') evergreen:any
-  @ViewChild('fashion') fashion:any
-  handleEvoucherChange($event: Event) {
-    const check = $event.target as HTMLInputElement;
-    if(check.checked){
-      this.search.searchBar.nativeElement.value=''
+  constructor(
+    public category: CategoryService,
+    public sorting: SortingService,
+    private search: SearchService
+  ) {}
+  handleCategory($event: any) {
+    if($event.target.type==='checkbox'){
+      if($event.target.checked){
+        this.category.categories.push($event.target.name)
+      }
+      else if(this.category.categories.includes($event.target.name)){
+        this.category.categories.splice(this.category.categories.indexOf($event.target.name),1)
+      }
     }
-    this.sorting.doSortAtoZ=false;
-    this.sorting.doSortZtoA=false;
   }
-  handleProductChange($event: Event) {
-    const check = $event.target as HTMLInputElement;
-    if(check.checked){
-      this.search.searchBar.nativeElement.value=''
-    }
-    this.sorting.doSortAtoZ=false;
-    this.sorting.doSortZtoA=false;
-  }
-  handleEvergereenChange($event: Event) {
-    const check = $event.target as HTMLInputElement;
-    if(check.checked){
-
-    }
-    this.sorting.doSortAtoZ=false;
-    this.sorting.doSortZtoA=false;
-
-  }
-  handleFashionChange($event: Event) {
-    const check = $event.target as HTMLInputElement;
-    if(check.checked){
-      this.search.searchBar.nativeElement.value=''
-    }
-    this.sorting.doSortAtoZ=false;
-    this.sorting.doSortZtoA=false;
-  }
-  ngAfterViewInit(){
-    this.category.eVoucher=this.eVoucher.nativeElement as HTMLInputElement
-    this.category.evergreen=this.evergreen.nativeElement as HTMLInputElement
-    this.category.fashion=this.fashion.nativeElement as HTMLInputElement
-    this.category.product=this.product.nativeElement as HTMLInputElement
-  }
-
-
 }

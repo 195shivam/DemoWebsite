@@ -11,6 +11,11 @@ import { SearchComponent } from './components/search/search.component';
 import { CategoryComponent } from './components/category/category.component';
 import { ItemsComponent } from './components/items/items.component';
 import { ModalDirective } from './directives/modal.directive';
+import { HeaderComponent } from './components/header/header.component';
+import { SortingModalComponent } from './components/sorting-modal/sorting-modal.component';
+import { SortPipe } from './pipes/sort.pipe';
+import { FooterComponent } from './components/footer/footer.component';
+import { CategoryPipePipe } from './pipes/category-pipe.pipe';
 
 @NgModule({
   declarations: [
@@ -22,7 +27,12 @@ import { ModalDirective } from './directives/modal.directive';
     SearchComponent,
     CategoryComponent,
     ItemsComponent,
-    ModalDirective
+    ModalDirective,
+    HeaderComponent,
+    SortingModalComponent,
+    SortPipe,
+    FooterComponent,
+    CategoryPipePipe
   ],
   imports: [
     BrowserModule,
