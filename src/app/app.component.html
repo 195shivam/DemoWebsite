@@ -3,7 +3,7 @@
 
 <div class="d-flex gap-2 container-lg container-fluid px-lg-5 my-3 belowSuggestion">
   <span class="fw-bold">Applied Filter:</span>
-  <span class="border border-dark border-1 rounded-1" *ngFor="let cetegory of category.categories; let i=index">{{cetegory}}<button
+  <span class="border border-dark border-1 rounded-1" *ngFor="let cetegory of category.categories; let i=index">{{cetegory.categoryName}}<button
     class="border-0 button" (click)="removeCategory(i)">x</button></span>
 </div>
 

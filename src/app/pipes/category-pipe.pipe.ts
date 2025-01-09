@@ -1,28 +1,26 @@
 import { Pipe, PipeTransform } from '@angular/core';
 
 @Pipe({
-  name: 'categoryPipe'
+  name: 'categoryPipe',
+  pure:false
 })
 export class CategoryPipePipe implements PipeTransform {
 
   transform(value: any[], categories: any): any[] {
-    return value.filter((v) => {
+    return value.filter((v , ind) => {
+
       if (
-        !(
-          categories.includes('eVoucher') ||
-          categories.includes('evergreen') ||
-          categories.includes('fashion') ||
-          categories.includes('products')
-        )
+        categories.length===0
       ) {
+
         return true;
-      } else if (categories.includes('eVoucher')) {
+      } else if (categories.find((obj:any)=>obj.categoryName==='eVoucher') && v.category==='e-voucher') {
         return true;
-      } else if (categories.includes('evergreen')) {
+      } else if (categories.find((obj:any)=>obj.categoryName==='evergreen') && v.category==='evergreen') {
         return true;
-      } else if (categories.includes('fashion')) {
+      } else if (categories.find((obj:any)=>obj.categoryName==='fashion') && v.category==='fashion & retail') {
         return true;
-      } else if (categories.includes('products')) {
+      } else if (categories.find((obj:any)=>obj.categoryName==='products') && v.category==='product') {
         return true;
       } else {
         return false;

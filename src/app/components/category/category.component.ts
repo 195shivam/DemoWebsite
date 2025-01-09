@@ -1,3 +1,4 @@
+import { findIndex } from 'rxjs';
 import { Component, ViewChild, ElementRef } from '@angular/core';
 import { CategoryService } from 'src/app/services/category.service';
 import { SearchService } from 'src/app/services/search.service';
@@ -17,10 +18,14 @@ export class CategoryComponent {
   handleCategory($event: any) {
     if($event.target.type==='checkbox'){
       if($event.target.checked){
-        this.category.categories.push($event.target.name)
+        const categoryData={
+          categoryName:$event.target.name,
+          categoryEl:$event.target
+        }
+        this.category.categories.push(categoryData)
       }
-      else if(this.category.categories.includes($event.target.name)){
-        this.category.categories.splice(this.category.categories.indexOf($event.target.name),1)
+      else if(this.category.categories.find((obj:any)=>obj.categoryName===$event.target.name)){
+        this.category.categories.splice(this.category.categories.findIndex((obj:any)=>obj.categoryName===$event.target.name),1)
       }
     }
   }

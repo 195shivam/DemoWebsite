@@ -12,52 +12,48 @@ import { SortingService } from 'src/app/services/sorting.service';
   styleUrls: ['./items.component.css'],
 })
 export class ItemsComponent {
-updateShowModal(showModal:boolean) {
-this.showModal=showModal
-console.log(showModal,this.showModal,'showModal')
-}
-setOrder(data:number) {
-this.c=data
-}
-handleError($event: any) {
-  $event.target.src='../../../assets/images/placeholder.png'
-}
-  constructor(public data: DataService, public category: CategoryService , private search:SearchService , public sorting:SortingService)  {
-    // console.log(data.product);
+  constructor(
+    public data: DataService,
+    public category: CategoryService,
+    public search: SearchService,
+    public sorting: SortingService
+  ) {
+
   }
-  c=0;
+  c = 0;
   showModal = false;
-  doApply=false;
-  tempArr:any=[]
+  doApply = false;
+  searchKeyword=''
+  tempArr: any = [];
   filteredProduct: any = [];
+  updateShowModal(showModal: boolean) {
+    this.showModal = showModal;
+  }
+
+  setOrder(order: number) {
+    this.c = order;
+  }
+
+  handleError($event: any) {
+    $event.target.src = '../../../assets/images/placeholder.png';
+  }
 
   handleModal() {
     this.showModal = !this.showModal;
   }
   closeSortingModal() {
-    this.showModal=false
+    this.showModal = false;
   }
 
-
-  ngDoCheck() {
-    console.log(this.showModal)
-    this.data.dataObs.pipe(
-
-      toArray()).subscribe({
-      next: (v) => {this.filteredProduct = v
-        this.data.suggestionProduct=this.filteredProduct
+  ngOnInit() {
+    this.data.dataObs.pipe(toArray()).subscribe({
+      next: (v) => {
+        this.filteredProduct = v;
+        this.data.suggestionProduct = this.filteredProduct;
       },
     });
-
-    if(this.search.searchBar!=undefined && (this.search.searchedArr.length>0 || this.search.searchBar.nativeElement.value.length>0)){
-
-      this.filteredProduct=this.search.searchedArr
-      this.search.searchedArr=[]
-    }
-    if(this.filteredProduct.length === this.tempArr.length){
-      this.filteredProduct=this.tempArr
-    }
-
   }
-
+  ngOnChanges(){
+    console.log('OnChanges')
+  }
 }

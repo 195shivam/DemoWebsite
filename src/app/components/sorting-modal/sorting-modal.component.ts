@@ -1,4 +1,6 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { CategoryService } from 'src/app/services/category.service';
+import { SearchService } from 'src/app/services/search.service';
 import { SortingService } from 'src/app/services/sorting.service';
 
 @Component({
@@ -9,7 +11,7 @@ import { SortingService } from 'src/app/services/sorting.service';
 export class SortingModalComponent {
   @Output() sortOrder: EventEmitter<number> = new EventEmitter();
   @Output() updateShowModal: EventEmitter<boolean> = new EventEmitter();
-  constructor(public sortingService: SortingService) {}
+  constructor(public sortingService: SortingService , public category:CategoryService , private search:SearchService) {}
   c=0;
   @Input() showModal!:boolean
   handleReset() {
@@ -17,6 +19,12 @@ export class SortingModalComponent {
     this.sortOrder.emit(this.c);
     this.showModal=false
     this.updateShowModal.emit(this.showModal)
+    this.category.categories=this.category.categories.filter((items:any)=>{
+      items.categoryEl.checked=false;
+      return false;
+    })
+    this.search.searchBar.value=''
+    this.search.searchKeyword=''
   }
   applySort() {
     this.sortOrder.emit(this.c);

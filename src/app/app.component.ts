@@ -11,6 +11,7 @@ export class AppComponent {
   title = 'demoWebsite';
   constructor(public category: CategoryService, private search:SearchService ) {}
   removeCategory(index:number){
+    this.category.categories[index].categoryEl.checked=false;
     this.category.categories.splice(index,1)
   }
 

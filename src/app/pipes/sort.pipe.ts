@@ -1,11 +1,13 @@
 import { Pipe, PipeTransform } from '@angular/core';
 
 @Pipe({
-  name: 'sort'
+  name: 'sort',
+  pure:true
 })
 export class SortPipe implements PipeTransform {
 
   transform(value: any[], order: number = 0): any[] {
+    console.log(order)
     if (order===0) {
       return value;
     }

@@ -16,6 +16,8 @@ import { SortingModalComponent } from './components/sorting-modal/sorting-modal.
 import { SortPipe } from './pipes/sort.pipe';
 import { FooterComponent } from './components/footer/footer.component';
 import { CategoryPipePipe } from './pipes/category-pipe.pipe';
+import { FormsModule } from '@angular/forms';
+import { SearchFilterPipe } from './pipes/search-filter.pipe';
 
 @NgModule({
   declarations: [
@@ -32,11 +34,13 @@ import { CategoryPipePipe } from './pipes/category-pipe.pipe';
     SortingModalComponent,
     SortPipe,
     FooterComponent,
-    CategoryPipePipe
+    CategoryPipePipe,
+    SearchFilterPipe
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
